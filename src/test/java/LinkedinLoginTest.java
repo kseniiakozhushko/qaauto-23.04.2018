@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,13 +25,30 @@ public class LinkedinLoginTest {
         WebElement inputPassword = webDriver.findElement(By.id("login-password"));
         WebElement signInButton = webDriver.findElement(By.id("login-submit"));
 
-        Assert.assertFalse(signInButton.isDisplayed(), "Sign In button is not Displayed.");
+        Assert.assertTrue(signInButton.isDisplayed(), "Sign In button is not Displayed.");
 
-        emailField.sendKeys("ksko.ksko1996@gmail.com");
+        emailField.sendKeys("ksko.ksko@gmail.com");
         inputPassword.sendKeys("reckless1");
         signInButton.click();
+        sleep(3000);
 
-        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/feed/", "Home Page URL is wrong.");
+        String actualPageTitle = webDriver.getTitle();
+        Assert.assertNotEquals(actualLoginPageTitle, actualPageTitle, "Connect with invalid credentials");
+
+        webDriver.get("https://www.linkedin.com/uas/login?session_redirect=&goback=&trk=hb_signin");
+
+        sleep(3000);
+        WebElement sessionEmailField = webDriver.findElement(By.id("session_key-login"));
+        WebElement inputSessionPassword = webDriver.findElement(By.id("session_password-login"));
+        WebElement Button = webDriver.findElement(By.id("btn-primary"));
+
+        sessionEmailField.sendKeys("ksko.ksko1996@gmail.com");
+        inputSessionPassword.sendKeys("reckless1");
+        Button.click();
+
+        sleep(3000);
+
+        //Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/feed/", "Home Page URL is wrong.");
 
         String actualHomePageTitle = webDriver.getTitle();
         Assert.assertNotEquals(actualLoginPageTitle, actualHomePageTitle, "Page title did not change after Sign In");
