@@ -20,8 +20,6 @@ public class LinkedinLoginPage {
         signInButton = webDriver.findElement(By.id("login-submit"));
     }
 
-
-
     public void login(String email, String password){
         emailField.sendKeys(email);
         inputPassword.sendKeys(password);
