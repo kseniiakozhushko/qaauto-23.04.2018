@@ -2,7 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import javax.xml.soap.Text;
 
 public class LinkedinLoginSubmitPage {
     private WebDriver webDriver;
