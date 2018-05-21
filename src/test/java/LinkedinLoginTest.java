@@ -19,7 +19,7 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void successfulLoginTest() throws InterruptedException {
+    public void successfulLoginTest() {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
@@ -33,7 +33,7 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void negativeLoginTest() throws InterruptedException {
+    public void negativeLoginTest(){
 
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
@@ -49,7 +49,7 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void incorrectLoginTest() throws InterruptedException {
+    public void incorrectLoginTest() {
 
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
@@ -65,7 +65,7 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void emptyFieldsLoginTest() throws InterruptedException {
+    public void emptyFieldsLoginTest() {
 
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
