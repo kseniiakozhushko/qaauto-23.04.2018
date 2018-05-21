@@ -12,14 +12,22 @@ public class LinkedinLoginTest {
         webDriver.get("https://www.linkedin.com/");
     }
 
-    @Test
-    public void successfulLoginTest() {
+    @DataProvider
+    public Object[][] validDataProvider() {
+        return new Object[][]{
+                { "ksko.ksko1996@gmail.com", "reckless1" },
+                { "KSKO.KSKO1996@GMAIL.COM", "reckless1" },
+        };
+    }
+
+    @Test(dataProvider = "validDataProvider")
+    public void successfulLoginTest(String email, String password) {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
 
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign In Button is not displayed");
-        linkedinLoginPage.login("ksko.ksko1996@gmail.com", "reckless1");
+        linkedinLoginPage.login(email, password);
 
         LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
         Assert.assertEquals(linkedinHomePage.getCurrentUrl(),"https://www.linkedin.com/feed/", "Home Page URL is wrong.");
@@ -27,7 +35,7 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void negativeLoginTest(){
+    public void negativeReturnedToLoginSubmitTest(){
 
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
@@ -37,9 +45,9 @@ public class LinkedinLoginTest {
 
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
 
-        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit", "Login-Submit Page Url is wrong");
-        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(), "Войти в LinkedIn", "Login-Submit Page Title is wrong");
-        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessage(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
+        Assert.assertTrue(linkedinLoginSubmitPage.isPageLoaded(), "Login-Submit page is not loaded");
+        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
+
     }
 
     @Test
@@ -55,7 +63,7 @@ public class LinkedinLoginTest {
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit", "Login-Submit Page Url is wrong");
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(), "Войти в LinkedIn", "Login-Submit Page Title is wrong");
-        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessage(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
+        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
     }
 
     @Test
@@ -82,7 +90,7 @@ public class LinkedinLoginTest {
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(),"https://www.linkedin.com/uas/login-submit", "Login-Submit Page Url is wrong");
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentTitle(),"Войти в LinkedIn", "Login-Submit Page Title is wrong" );
-        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessage(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
+        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
     }
 
     @AfterMethod

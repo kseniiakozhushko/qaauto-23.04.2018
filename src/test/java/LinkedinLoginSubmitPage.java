@@ -3,30 +3,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class LinkedinLoginSubmitPage {
-    private WebDriver webDriver;
+public class LinkedinLoginSubmitPage extends LinkedinBasePage {
     private WebElement errorMessage;
+    private WebElement emailField;
 
 
     public LinkedinLoginSubmitPage(WebDriver webDriver){
-        this.webDriver = webDriver;
+        super(webDriver);
         initElements();
     }
 
     public void initElements(){
         errorMessage = webDriver.findElement(By.xpath("//div[@role='alert']"));
+        emailField = webDriver.findElement(By.id("session_key_login"));
     }
 
-    public String getCurrentUrl(){
-        return webDriver.getCurrentUrl();
-    }
-
-    public String getCurrentTitle(){
-        return webDriver.getTitle();
-    }
-
-    public String getErrorMessage(){
+    public String getErrorMessageText(){
          return errorMessage.getText();
+    }
+
+    public boolean isPageLoaded(){
+        return emailField.isDisplayed();
     }
 }
 
