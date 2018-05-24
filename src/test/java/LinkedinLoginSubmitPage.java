@@ -15,7 +15,7 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage {
 
     public void initElements(){
         errorMessage = webDriver.findElement(By.xpath("//div[@role='alert']"));
-        emailField = webDriver.findElement(By.id("session_key_login"));
+        emailField = webDriver.findElement(By.id("session_key-login"));
     }
 
     public String getErrorMessageText(){
