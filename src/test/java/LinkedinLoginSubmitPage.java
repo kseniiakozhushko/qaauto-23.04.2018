@@ -1,25 +1,25 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class LinkedinLoginSubmitPage extends LinkedinBasePage {
+
+    @FindBy(xpath = "//div[@role='alert']" )
     private WebElement errorMessage;
+
+    @FindBy(id = "session_key-login" )
     private WebElement emailField;
 
 
     public LinkedinLoginSubmitPage(WebDriver webDriver){
         super(webDriver);
-        initElements();
-    }
-
-    public void initElements(){
-        errorMessage = webDriver.findElement(By.xpath("//div[@role='alert']"));
-        emailField = webDriver.findElement(By.id("session_key-login"));
+        PageFactory.initElements(webDriver, this);
     }
 
     public String getErrorMessageText(){
-         return errorMessage.getText();
+        return errorMessage.getText();
     }
 
     public boolean isPageLoaded(){

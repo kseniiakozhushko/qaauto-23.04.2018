@@ -48,7 +48,7 @@ public class LinkedinLoginTest {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign In Button is not displayed");
 
-        LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(email, password);
+        LinkedinHomePage linkedinHomePage = linkedinLoginPage.succesfullLogin(email, password);
 
         Assert.assertEquals(linkedinHomePage.getCurrentUrl(),"https://www.linkedin.com/feed/", "Home Page URL is wrong.");
         Assert.assertTrue(linkedinHomePage.getCurrentTitle().contains("LinkedIn"), "Home page Title is wrong" );
@@ -60,13 +60,11 @@ public class LinkedinLoginTest {
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign In Button is not displayed");
-        linkedinLoginPage.login(email, password);
 
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.unsuccesfullLogin(email, password);
 
         Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
         Assert.assertTrue(linkedinLoginSubmitPage.isPageLoaded(), "Login-Submit page is not loaded");
-
     }
 
     @Test(dataProvider = "emptyFieldsDataProvider")
@@ -75,10 +73,11 @@ public class LinkedinLoginTest {
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign In Button is not displayed");
-        linkedinLoginPage.login(email, password);
 
-        Assert.assertEquals(linkedinLoginPage.getCurrentUrl(), "https://www.linkedin.com/", "Login Page Url is wrong");
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Log In or Sign Up", "Login Page Title is wrong");
+        LinkedinLoginPage linkedinLoginPage1 = linkedinLoginPage.emptyFieldsLogin(email, password);
+
+        Assert.assertEquals(linkedinLoginPage1.getCurrentUrl(), "https://www.linkedin.com/", "Login Page Url is wrong");
+        Assert.assertEquals(linkedinLoginPage1.getCurrentTitle(), "LinkedIn: Log In or Sign Up", "Login Page Title is wrong");
     }
 
     @AfterMethod

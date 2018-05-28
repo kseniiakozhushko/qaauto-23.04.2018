@@ -3,6 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 public class LinkedinLoginPage extends LinkedinBasePage {
 
     @FindBy(id = "login-email")
@@ -19,17 +20,28 @@ public class LinkedinLoginPage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public LinkedinHomePage login(String email, String password){
+    public LinkedinHomePage succesfullLogin(String email, String password){
         emailField.sendKeys(email);
         inputPassword.sendKeys(password);
         signInButton.click();
         return PageFactory.initElements(webDriver, LinkedinHomePage.class );
     }
 
+    public LinkedinLoginSubmitPage unsuccesfullLogin(String email, String password){
+        emailField.sendKeys(email);
+        inputPassword.sendKeys(password);
+        signInButton.click();
+        return PageFactory.initElements(webDriver, LinkedinLoginSubmitPage.class );
+    }
+
+    public LinkedinLoginPage emptyFieldsLogin(String email, String password){
+        emailField.sendKeys(email);
+        inputPassword.sendKeys(password);
+        signInButton.click();
+        return PageFactory.initElements(webDriver, LinkedinLoginPage.class );
+    }
+
     public boolean isSignInButtonDisplayed() {
         return signInButton.isDisplayed();
     }
 }
-
-
-
