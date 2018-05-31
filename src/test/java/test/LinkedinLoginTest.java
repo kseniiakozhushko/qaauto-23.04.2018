@@ -1,22 +1,13 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+package test;
+
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+import page.LinkedinHomePage;
+import page.LinkedinLoginPage;
+import page.LinkedinLoginSubmitPage;
 
-import java.util.concurrent.TimeUnit;
-
-import static java.lang.Thread.sleep;
-
-
-public class LinkedinLoginTest {
-    WebDriver webDriver;
-
-    @BeforeMethod
-    public void before() {
-        webDriver = new FirefoxDriver();
-        webDriver.get("https://www.linkedin.com/");
-    }
-
+public class LinkedinLoginTest extends LinkedinBaseTest {
     @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
@@ -47,7 +38,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "validDataProvider")
     public void successfulLoginTest(String email, String password) throws InterruptedException {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
+        //linkedinLoginPage.waitUntilElementIsClickable(, 30);
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login Page is not loaded");
@@ -62,7 +53,6 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "invalidDataProvider")
     public void negativeReturnedToLoginSubmitTest(String email, String password) {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login Page is not loaded");
@@ -75,7 +65,6 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "emptyFieldsDataProvider")
     public void emptyFieldsLoginTest(String email, String password) {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login Page is not loaded");
@@ -86,9 +75,6 @@ public class LinkedinLoginTest {
         Assert.assertEquals(linkedinLoginPage1.getCurrentTitle(), "LinkedIn: Log In or Sign Up", "Login Page Title is wrong");
     }
 
-    @AfterMethod
-    public void after(){
-        webDriver.close();
-    }
+
 
 }
