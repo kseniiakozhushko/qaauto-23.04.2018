@@ -17,6 +17,7 @@ public class LinkedinHomePage extends LinkedinBasePage {
     }
 
     public boolean isPageLoaded() {
+
         return profileNavItem.isDisplayed();
     }
 }

@@ -27,9 +27,9 @@ public class GMailService {
 
 
     public static void main(String[] args) {
-        String messageSubject = "Lesson 10";
+        String messageSubject = "Ks, данное сообщение содержит ссылку для изменения пароля";
         String messageTo = "ksko.ksko1996@gmail.com";
-        String messageFrom = "<ksusha.kozhushko@gmail.com>";
+        String messageFrom = "<security-noreply@linkedin.com>";
 
         GMailService gMailService = new GMailService();
         gMailService.connect();
