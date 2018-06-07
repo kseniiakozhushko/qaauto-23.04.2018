@@ -6,12 +6,15 @@ import page.*;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Reset Password Test Class
+ */
 public class LinkedinResetPasswordTest extends LinkedinBaseTest{
 
     @Test
     public void successfullPasswordResetTest() {
         String userEmail = "ksko.ksko1996@gmail.com";
-        String newUserPassword = "P@ssword123";
+        String newUserPassword = "reckless1";
 
         LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage = linkedinLoginPage.clickOnForgotPasswordLink();
         Assert.assertTrue(linkedinRequestPasswordResetPage.isPageLoaded(), "RequestPasswordResetPage is not loaded");

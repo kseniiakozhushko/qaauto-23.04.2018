@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Search Result Page Object class
+ */
 public class LinkedinSearchResults extends LinkedinBasePage{
 
     @FindBy (xpath = "//h3[@class='search-results__total Sans-15px-black-55% mb2 mh5']")
@@ -17,6 +20,10 @@ public class LinkedinSearchResults extends LinkedinBasePage{
     @FindBy(xpath = "//li[contains(@class, 'search-result search-result__occluded-item')]")
     private List<WebElement> searchResultElements;
 
+    /**
+     * Constructor of SearchResultsPage
+     * @param webDriver - webDriver object
+     */
     public LinkedinSearchResults(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);

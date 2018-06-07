@@ -7,7 +7,14 @@ import page.LinkedinHomePage;
 import page.LinkedinLoginPage;
 import page.LinkedinLoginSubmitPage;
 
+/**
+ * Login Test Class
+ */
 public class LinkedinLoginTest extends LinkedinBaseTest {
+    /**
+     * valid credentials, invalid credentials and empty fields for login
+     * @return
+     */
     @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
@@ -37,42 +44,27 @@ public class LinkedinLoginTest extends LinkedinBaseTest {
     }
 
     @Test(dataProvider = "validDataProvider")
-    public void successfulLoginTest(String email, String password) throws InterruptedException {
-        //linkedinLoginPage.waitUntilElementIsClickable(, 30);
-
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
+    public void successfulLoginTest(String email, String password)  {
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login Page is not loaded");
 
         LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(email, password);
-
         Assert.assertTrue(linkedinHomePage.isPageLoaded(), "Login Page is not loaded");
 
-        Assert.assertEquals(linkedinHomePage.getCurrentUrl(),"https://www.linkedin.com/feed/", "Home Page URL is wrong.");
-        Assert.assertTrue(linkedinHomePage.getCurrentTitle().contains("LinkedIn"), "Home page Title is wrong" );
     }
 
     @Test(dataProvider = "invalidDataProvider")
     public void negativeReturnedToLoginSubmitTest(String email, String password) {
 
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login Page is not loaded");
-
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.login(email, password);
-
-        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Wrong error message text displayed");
         Assert.assertTrue(linkedinLoginSubmitPage.isPageLoaded(), "Login-Submit page is not loaded");
     }
 
     @Test(dataProvider = "emptyFieldsDataProvider")
     public void emptyFieldsLoginTest(String email, String password) {
 
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),"LinkedIn: Log In or Sign Up", "Login page Title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Login Page is not loaded");
-
         LinkedinLoginPage linkedinLoginPage1 = linkedinLoginPage.login(email, password);
 
-        Assert.assertEquals(linkedinLoginPage1.getCurrentUrl(), "https://www.linkedin.com/", "Login Page Url is wrong");
-        Assert.assertEquals(linkedinLoginPage1.getCurrentTitle(), "LinkedIn: Log In or Sign Up", "Login Page Title is wrong");
     }
 
 

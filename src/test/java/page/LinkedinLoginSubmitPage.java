@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
+/**
+ * Login Submit Page Object class
+ */
 public class LinkedinLoginSubmitPage extends LinkedinBasePage {
 
     @FindBy(xpath = "//div[@role='alert']" )
@@ -15,6 +18,10 @@ public class LinkedinLoginSubmitPage extends LinkedinBasePage {
     private WebElement emailField;
 
 
+    /**
+     * Constructor of LoginSubmitPage
+     * @param webDriver - webDriver Object
+     */
     public LinkedinLoginSubmitPage(WebDriver webDriver){
         super(webDriver);
         PageFactory.initElements(webDriver, this);

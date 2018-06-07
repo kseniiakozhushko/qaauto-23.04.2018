@@ -7,6 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
+/**
+ * Home Page Object class
+ */
 public class LinkedinHomePage extends LinkedinBasePage {
 
     @FindBy(xpath = "//li[@id='profile-nav-item']")
@@ -15,6 +18,10 @@ public class LinkedinHomePage extends LinkedinBasePage {
     @FindBy(xpath = "//input[@placeholder='Поиск']")
     private WebElement searchField;
 
+    /**
+     * Constructor of HomePage
+     * @param webDriver - webDriver object
+     */
     public LinkedinHomePage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -25,6 +32,10 @@ public class LinkedinHomePage extends LinkedinBasePage {
         return profileNavItem.isDisplayed();
     }
 
+    /**
+     * Search method
+     * @param searchTerm - search parameter
+     */
     public LinkedinSearchResults search(String searchTerm) {
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.RETURN);

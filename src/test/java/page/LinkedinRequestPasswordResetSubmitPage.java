@@ -6,7 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Request Password Reset Submit Page Object class
+ */
 public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
+
+    /**
+     * Constructor of RequstPasswordResetSubmitPage
+     * @param  webDriver - webDriver object
+     */
     public LinkedinRequestPasswordResetSubmitPage (WebDriver webDriver){
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -19,6 +27,9 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
     @FindBy(id = "resend-url")
     private WebElement resendLinkButton;
 
+    /**
+     * navigateToLinkFromEmail - method to navigate to LinkedinSetNewPasswordPage from Gmail letter with link
+     */
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
         String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
         String messageTo = "ksko.ksko1996@gmail.com";
